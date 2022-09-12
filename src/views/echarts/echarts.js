@@ -149,6 +149,7 @@ let chartDom = document.getElementById('echarts2');
     if(chartDom){
     const myChart2 = echarts.init(chartDom);
     myChart2.setOption(option)
+    return myChart2
     }
 
 }
@@ -235,6 +236,7 @@ export  const chart3=()=>{
       if(chartDom){
       const myChart3 = echarts.init(chartDom);
       myChart3.setOption(option)
+      return myChart3
       }
   }
 export const chart4=()=>{
@@ -304,5 +306,6 @@ export const chart4=()=>{
   if(chartDom){
   const myChart4 = echarts.init(chartDom);
   myChart4.setOption(option)
+  return myChart4
   } 
 }

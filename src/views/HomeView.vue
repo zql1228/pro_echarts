@@ -116,8 +116,34 @@
           <div class="content-right-top-div">
             <div>案件办结率</div>
             <div>95<span>%</span></div>
-            <div>
-              <img src="" alt="">
+            <div class="content-right-top-div-div">
+              <img src="@/assets/img/route6.png" alt=""/>
+              <img src="@/assets/img/route7.png" alt=""/>
+              <img src="@/assets/img/route8.png" alt=""/>
+              <img src="@/assets/img/rectangle11.png" alt=""/>
+              <img src="@/assets/img/rectangle12.png" alt=""/>
+            </div>
+          </div>
+          <div class="content-right-top-div">
+            <div>已办结数</div>
+            <div>95<span>个</span></div>
+            <div  class="content-right-top-div-div">
+              <img src="@/assets/img/route6.png" alt=""/>
+              <img src="@/assets/img/route7.png" alt=""/>
+              <img src="@/assets/img/route8.png" alt=""/>
+              <img src="@/assets/img/rectangle11.png" alt=""/>
+              <img src="@/assets/img/rectangle12.png" alt=""/>
+            </div>
+          </div>
+          <div class="content-right-top-div">
+            <div>未办结数</div>
+            <div>95<span>个</span></div>
+            <div class="content-right-top-div-div">
+              <img src="@/assets/img/route6.png" alt=""/>
+              <img src="@/assets/img/route7.png" alt=""/>
+              <img src="@/assets/img/route8.png" alt=""/>
+              <img src="@/assets/img/rectangle11.png" alt=""/>
+              <img src="@/assets/img/rectangle12.png" alt=""/>
             </div>
           </div>
          
@@ -134,6 +160,23 @@
     <div id="map">
 
     </div>
+    <div class="dialog">
+      <div>xxx项目</div>
+      <ul class="dialog-ul">
+        <li>
+          <span>线索上报时间</span>
+          <span>涉及人数</span>
+          <span>涉及经额</span>
+          <span>操作</span>
+        </li>
+        <li v-for="item of list" :key="item.id">
+          <span>{{item.time}}</span>
+          <span>{{item.number}}</span>
+          <span>{{item.money}}</span>
+          <span>查看</span>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -149,6 +192,17 @@ export default {
     return {
       nowTime:'',
       map:null,
+      lnglats: [
+        [113.922282,35.332887],
+	    [113.963101,35.318516],
+	    [113.960801,35.306263],
+	    [113.926809,35.301255]
+      ],
+      list:[
+        {id:'01',time:'2022-06-06',number:10,money:1000},
+        {id:'02',time:'2022-06-06',number:10,money:1000},
+        {id:'03',time:'2022-06-06',number:10,money:1000},
+      ]
     }
   },
   mounted(){
@@ -158,19 +212,26 @@ export default {
            this.getNowTime(); //每秒更新一次时间
         }, 1000); 
         this.$nextTick(()=>{
-          chart1()
-          chart2() 
-          chart3()
-          chart4()
+          const myChart1=chart1()
+          const myChart2=chart2() 
+          const myChart3=chart3()
+          const myChart4=chart4()
+          window.addEventListener('resize',()=>{
+            myChart1.resize();
+            myChart2.resize();
+            myChart3.resize();
+            myChart4.resize();
+      })
         })  
       this.initMap()
+    
        
   },
   methods:{
     getNowTime(){
       this.nowTime =moment(new Date()).format('YYYY.MM.DD hh:mm:ss') 
     },
-    initMap() {
+    initMap() {//初始化地图
       const that = this;
       AMapLoader.load({
         key: "8ede6988a3a58a39d1b605a9d0790642", // 申请好的Web端开发者Key，首次调用 load 时必填
@@ -186,18 +247,37 @@ export default {
           mapStyle:"amap://styles/darkblue", //显示样式
         });
       })
-    }
+    },
+    getMark() {
+      //遍历生成多个标记点
+      for (var i = 0, marker; i < this.lnglats.length; i++) {
+        var marker = new AMap.Marker({
+          position: this.lnglats[i],//不同标记点的经纬度
+          map: map
+        });
+        marker.content = '我是第' + (i + 1) + '个Marker';
+        marker.on('click', markerClick);
+        marker.emit('click', {target: marker});//默认初始化不出现信息窗体,打开初始化就出现信息窗体
+      }
+      function markerClick(e) {
+        infoWindow.setContent(e.target.content);
+        infoWindow.open(map, e.target.getPosition());
+      }
+      map.setFitView();
+      }
   }
 }
 </script>
 <style lang="less" scoped>
 @primary-color: #0E9CFF;
 .container{
+  min-height: 1080px;
   height: 100vh;
   width: 100vw;
   position: relative;
   background-attachment: fixed;
   mix-blend-mode:multiply;/*混合模式：穿透*/
+  overflow: auto;
 }
 .header{
   display: flex;
@@ -214,14 +294,14 @@ export default {
     top:-2px;
   }
   img:nth-child(2){
-    left:1.25rem;
-    top:10px;
+    left:24px;
+    top:27px;
     height:20px;
     width:20px;
   }
   span{
     left:50px;
-    top:10px;
+    top:27px;
     color:#fff;
   }
 
@@ -241,6 +321,7 @@ export default {
   span{
     top:50%;left:50%;transform: translate(-50%,-50%);
     font-size: 30px;
+    display: inline-block;
     color:#fff
   }
 }
@@ -276,7 +357,8 @@ export default {
       position: absolute;
       width: 189px;
       height: 51px;
-      left: 21px;
+      top:95px;
+      left: 19px;
       background: url('@/assets/img/rectangle.png') no-repeat;
       background-size: cover;
       text-align: center;
@@ -285,8 +367,8 @@ export default {
     }
     .left-t:nth-child(2){
       position: absolute;
-      left:21px;
-      top:110px;
+      left:19px;
+      top:146px;
       height: 913.81px;
       width: 409.7px;
       background: url('@/assets/img/rectangle2.png') no-repeat;
@@ -394,12 +476,14 @@ export default {
   .content-right{
     .content-right-top{
       position: absolute;
-      left:480px;
-      top:110px;
+      left:471px;
+      top:146px;
+      display: flex;
       .content-right-top-div{
         width: 210px;
         height: 110px;
         padding:21px 17px;
+        margin-right:20px;
         background: url('@/assets/img/rectangle10.png') no-repeat;
         background-size: 100% 100%;
         box-sizing: border-box;
@@ -413,6 +497,44 @@ export default {
           font-size: 36px;
           span{font-size: 18px;padding-left:20px;}
         }
+        .content-right-top-div-div{
+          position: absolute;
+          left:110px;
+          width:110px;
+          height:100%;
+          top:0px;
+          img:nth-child(1){
+            position: absolute;
+            top:38px;
+            z-index: 10;
+            right:53.86px;
+          }
+          img:nth-child(2){
+            position: absolute;
+            top:30px;
+            right:45px;
+            z-index: 9;
+          }
+          img:nth-child(3){
+            position: absolute;
+            top:22px;
+            right: 38px;
+            z-index: 8;
+          }
+          img:nth-child(4){
+            position: absolute;
+            top:57px;
+           right: 23px;
+           z-index: 1;
+          }
+          img:nth-child(5){
+            position: absolute;
+            top:56px;
+           right: 20px;
+           z-index: 0;
+          }
+
+        }
 
       }
     }
@@ -420,8 +542,8 @@ export default {
       position: absolute;
       width: 189px;
       height: 51px; 
-      left:445px;
-      bottom:120px;
+      left:446px;
+      bottom:233px;
       background: url('@/assets/img/rectangle.png') no-repeat;
       background-size: cover;
       text-align: center;
@@ -430,8 +552,8 @@ export default {
     }
     .content-right-bottom{
       position: absolute;
-      right: 17px;
-      bottom: -90px;
+      right: 19.8px;
+      bottom: 23px;
       height: 212.81px;
       width: 1459px;
       background: url('@/assets/img/rectangle9.png') no-repeat;
@@ -443,11 +565,46 @@ export default {
 #map{
   position: absolute;
   width:100%;
-  height:100%;
+  height:100%; 
   top:0;
   left:0;
   bottom:0;
   right:0;
   z-index:-10
+}
+.dialog{
+  position: absolute;
+  z-index:10;
+  top:363px;
+  left:769px;
+  width: 460px;
+  height: 279px;
+  background: url('@/assets/img/rectangle13.png') no-repeat;
+    background-size: 100% 100%;
+  .dialog-ul{
+  font-size: 12px;
+  color: rgba(14, 156, 255, 0.8);
+  li{list-style: none;
+    width:424px;
+  }
+  li span{
+    display:inline-block;
+    width:30%;
+  }
+  li:first-child{
+    height:31px;
+    background: url('@/assets/img/vector3.png') no-repeat;
+    background-size: 100% 100%;
+    span{line-height: 31px;}
+    margin-bottom:16px;
+  }
+  li>span:last-child{width:10%}
+  li:not(nth-child(1)){
+    font-size:10px;
+    height:14px;
+    line-height:14px;
+    padding:10px 0;
+  }
+}
 }
 </style>
