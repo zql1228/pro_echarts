@@ -72,6 +72,10 @@
                   <img src="@/assets/img/intersect.png" alt="">
                   2%</div>
               </div>
+              <div class="rectangle-top-div-right">
+                  <span>25686</span>
+                  <div>涉及总人数</div>             
+              </div>
               <div class="rectangle-middle-echarts">
                 <div style="width:100%;height:100%" id="echarts2"></div>
               </div>
@@ -161,7 +165,7 @@
 
     </div>
     <div class="dialog">
-      <div>xxx项目</div>
+      <div class="dialog-title">xxx项目</div>
       <ul class="dialog-ul">
         <li>
           <span>线索上报时间</span>
@@ -196,7 +200,7 @@ export default {
         [113.922282,35.332887],
 	    [113.963101,35.318516],
 	    [113.960801,35.306263],
-	    [113.926809,35.301255]
+	    [114.933494, 25.831139]
       ],
       list:[
         {id:'01',time:'2022-06-06',number:10,money:1000},
@@ -224,7 +228,6 @@ export default {
       })
         })  
       this.initMap()
-    
        
   },
   methods:{
@@ -246,25 +249,38 @@ export default {
           center: [114.933494, 25.831139], //初始化地图中心点位置
           mapStyle:"amap://styles/darkblue", //显示样式
         });
+        this.getMark()
       })
     },
     getMark() {
-      //遍历生成多个标记点
-      for (var i = 0, marker; i < this.lnglats.length; i++) {
-        var marker = new AMap.Marker({
-          position: this.lnglats[i],//不同标记点的经纬度
-          map: map
+      var startIcon = new AMap.Icon({
+        // 图标尺寸
+        size: new AMap.Size(49, 68),
+        // 图标的取图地址
+        image: '//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-1.png',
+        // 图标所用图片大小
+        imageSize: new AMap.Size(49,68),
+    });
+      var markers = [{
+        icon: startIcon,
+        position: [116.368904, 39.913423]
+    }, {
+        icon: '//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-2.png',
+        position: [116.368904,50.913423]
+    }, {
+        icon: '//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-3.png',
+        position: [116.305467, 80.807761]
+    }];
+      markers.forEach((marker)=> {
+        new AMap.Marker({
+            map: this.map,
+            icon: marker.icon,
+            position: [marker.position[0], marker.position[1]],
+            offset: new AMap.Pixel(-13, -30)
         });
-        marker.content = '我是第' + (i + 1) + '个Marker';
-        marker.on('click', markerClick);
-        marker.emit('click', {target: marker});//默认初始化不出现信息窗体,打开初始化就出现信息窗体
-      }
-      function markerClick(e) {
-        infoWindow.setContent(e.target.content);
-        infoWindow.open(map, e.target.getPosition());
-      }
-      map.setFitView();
-      }
+    });
+    this.map.setFitView();
+    }
   }
 }
 </script>
@@ -273,7 +289,7 @@ export default {
 .container{
   min-height: 1080px;
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   position: relative;
   background-attachment: fixed;
   mix-blend-mode:multiply;/*混合模式：穿透*/
@@ -420,6 +436,18 @@ export default {
             }
           }
         }
+        .rectangle-top-div-right{
+          position: relative;
+          top:-90px;right:0px;
+          height: 166.6px;
+          div,span{position: absolute;}
+          span{
+            top:53px;right:38px;
+            color:#1890FF;font-size: 24px;}
+          div{
+            top:120px;right:41.7px;
+            color:#fff;font-size: 12px;}
+        }
         .rectangle-top-last{
           position: relative;
           top:100px;
@@ -450,6 +478,8 @@ export default {
         background:url('@/assets/img/rectangle4.png') no-repeat; 
         background-size: 100% 100%;
         .rectangle-middle-echarts{
+          position: relative;
+          top:-130px;
           width:379px;
           height:300px;
         }
@@ -552,7 +582,7 @@ export default {
     }
     .content-right-bottom{
       position: absolute;
-      right: 19.8px;
+      right: 0px;/*原本是19.8px 但是y轴的滚动条占了一定的宽度，所以设为了0, */
       bottom: 23px;
       height: 212.81px;
       width: 1459px;
@@ -581,11 +611,16 @@ export default {
   height: 279px;
   background: url('@/assets/img/rectangle13.png') no-repeat;
     background-size: 100% 100%;
+  .dialog-title{
+    color:@primary-color;
+    padding-left:40px;
+  }
   .dialog-ul{
   font-size: 12px;
   color: rgba(14, 156, 255, 0.8);
   li{list-style: none;
     width:424px;
+    box-sizing: border-box;
   }
   li span{
     display:inline-block;
@@ -596,14 +631,21 @@ export default {
     background: url('@/assets/img/vector3.png') no-repeat;
     background-size: 100% 100%;
     span{line-height: 31px;}
-    margin-bottom:16px;
+    margin-bottom:10px;
   }
-  li>span:last-child{width:10%}
-  li:not(nth-child(1)){
-    font-size:10px;
+  li span:last-child{width:10%}
+  li:not(:nth-child(1)){
     height:14px;
     line-height:14px;
+    font-size: 0.625rem;
     padding:10px 0;
+    box-sizing: border-box;
+    &>span:nth-child(2){
+     color: #FF9736;
+    }
+    &>span:last-child{
+     color: #00F7FF;
+    }
   }
 }
 }
