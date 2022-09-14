@@ -98,10 +98,14 @@ const option = {
 },
   xAxis: {
     type: 'category',
-    boundaryGap: false,
+    boundaryGap: true,
+  axisTick:{
+    //在设置boundaryGap 为 true的前提下，设置alignWithLabel使刻度线和标签对齐
+            alignWithLabel:true
+        },
     axisLine:{
       symbol:'arrow',
-      symbolOffset:[-15,15],
+      symbolOffset:[-5,5],
       symbolSize:[6,10],
       lineStyle:{
         color:'#019cff'
@@ -112,6 +116,10 @@ const option = {
   yAxis: {
     type: 'value',
     name:'单位：人',
+    nameTextStyle:{
+      color:'#018cff',
+      fontSize:8
+    },
     splitLine:{show:false},
     axisTick:{
       show:true,
@@ -119,7 +127,7 @@ const option = {
         color:'#019cff',
       }
     },
-    data:[20,50,100,400,800,1000]
+    data:[0,20,50,100,400,800,1000]
   },
   series: [
     {
@@ -127,6 +135,7 @@ const option = {
       type: 'line',
       smooth:true,
       name:'新增人数',
+      symbolSize:0,
       areaStyle: {
         color:{
           type: 'linear',

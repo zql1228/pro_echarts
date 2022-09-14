@@ -480,6 +480,7 @@ export default {
         .rectangle-middle-echarts{
           position: relative;
           top:-130px;
+          left:-10px;
           width:379px;
           height:300px;
         }
