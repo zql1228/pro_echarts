@@ -22,7 +22,8 @@ const option = {
                 fontSize:12,
                 color:'#fff'
             },
-            icon:'image://./image/ellipse.png'//格式为'image://+icon文件地址'，其中image::后的//不能省略
+            icon:'image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAABHNCSVQICAgIfAhkiAAAALJJREFUKJGNkC0OwlAQhL8lPQIJBIcDXw8HwdYTTBU3IIFgQJIACQep7DEqiqnC9CdvMW1T6HuEcbs7Mzu7ggWjg14FVrbZwNYU8G19hbQnGO91CcwcRvGHYLLTIcLJRq4RSet81AWGs8tdoSpzpl59oI+xEztxblkoief6xhdeRc4WHF/qxTEEWSjJXwIV1s+NPJra+xVDDUGXbN2gUAGXImf+TW43KKQCMRCVOfcmrw1vc7c5a9865mIAAAAASUVORK5CYII='
+           // icon:'image://./image/ellipse.png'//格式为'image://+icon文件地址'，其中image::后的//不能省略
         },
         {
             name:'非工程领域',
@@ -30,7 +31,8 @@ const option = {
                 fontSize:12,
                 color:'#fff'
             },
-            icon:'image://./image/ellipse2.png'
+            icon:'path://M12,0C12,1.57586,11.6896,3.13629,11.0866,4.5922C10.4835,6.04811,9.59958,7.37098,8.48528,8.48528C7.37098,9.59959,6.04811,10.4835,4.5922,11.0866C3.13629,11.6896,1.57586,12,0,12C0,12,8.17435e-7,5.40735,8.17435e-7,5.40735C0.710104,5.40735,1.41325,5.26749,2.06931,4.99574C2.72536,4.724,3.32146,4.32569,3.82358,3.82358C4.32569,3.32146,4.724,2.72535,4.99574,2.0693C5.26749,1.41325,5.40735,0.710104,5.40735,0C5.40735,0,12,0,12,0C12,0,12,0,12,0Z'
+            // icon:'image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAABHNCSVQICAgIfAhkiAAAALJJREFUKJGNkC0OwlAQhL8lPQIJBIcDXw8HwdYTTBU3IIFgQJIACQep7DEqiqnC9CdvMW1T6HuEcbs7Mzu7ggWjg14FVrbZwNYU8G19hbQnGO91CcwcRvGHYLLTIcLJRq4RSet81AWGs8tdoSpzpl59oI+xEztxblkoief6xhdeRc4WHF/qxTEEWSjJXwIV1s+NPJra+xVDDUGXbN2gUAGXImf+TW43KKQCMRCVOfcmrw1vc7c5a9865mIAAAAASUVORK5CYII='
         }
     ],
   },
