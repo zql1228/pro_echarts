@@ -5,8 +5,11 @@
 </template>
 
 <script>
+  import  {pageResize} from './config/resetScreenSize'
 export default{
-
+  mounted(){
+    pageResize()
+  }
 }
 </script>
 <style lang="less">
