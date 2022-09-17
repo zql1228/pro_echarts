@@ -288,11 +288,20 @@
 .convert(@px, @width: 96px) {
   @rem: unit((@px / @width),rem);
 }
-//929/1080=0.86
+
+@primary-color: #0E9CFF;
 .wleft(@px, @width: 96px) {
-  @rem: unit((@px*0.86 / @width),rem);
+    @rem: unit((@px*0.86 / @width),rem);
+  }   
+.wleft2(@px, @width: 96px) {
+    @rem: unit((@px / @width),rem);
+  }   
+@media screen and(max-height:929px) {
+  .container{color:#00F7FF}
 }
-  @primary-color: #0E9CFF;
+@media screen and(min-height:929px) {
+  .container{color:#f00}
+}
   .container{
     // min-height: 1080px;
     height: 100vh;
@@ -658,5 +667,146 @@
     }
   }
   }
+  /* 高度大于等于930px时 */
+@media (min-height:1000px) {
+  .content{
+    .content-left{
+      &>div:nth-child(1){
+        position: absolute;
+        width: .convert(189px)[@rem];
+        height: .wleft2(51px)[@rem];
+        top:.wleft2(95px)[@rem];
+        left: .convert(19px)[@rem];
+        background: url('@/assets/img/rectangle.png') no-repeat;
+        background-size: cover;
+        text-align: center;
+        line-height:.wleft2(51px)[@rem];
+        color:@primary-color;    
+      }
+      .left-t:nth-child(2){
+        position: absolute;
+        left:.convert(19px)[@rem] ;
+        top:.wleft2(146px)[@rem] !important;
+        height: .wleft2(913.81px)[@rem] !important;
+        width: .convert(409.7px)[@rem];
+        background: url('@/assets/img/rectangle2.png') no-repeat;
+        background-size: 100% 100%;
+        padding-left:.convert(16px)[@rem];
+        padding-top: .wleft2(32px)[@rem];
+        box-sizing: border-box;
+        .rectangle-top,.rectangle-middle{
+          margin-bottom:.wleft2(18px)[@rem] !important;
+        }
+        .rectangle-top,.rectangle-middle,.rectangle-bottom{
+          box-sizing: border-box;
+          padding:.wleft2(18px)[@rem] .convert(17px)[@rem] !important;
+        }
+        .rectangle-top,.rectangle-middle,.rectangle-bottom{
+          width: .convert(379.73px)[@rem];
+          height: .wleft2(213.24px)[@rem] !important;
+          background:url('@/assets/img/rectangle3.png') no-repeat;
+          background-size: 100% 100%;
+          h3{
+            color:#01C2FF;
+            margin:0;
+            margin-bottom: .wleft2(10px)[@rem]!important;         
+          }
+          &>div:nth-child(3){
+            top:.wleft2(50px)[@rem]!important;
+          }
+          .rectangle-top-div{
+            position: relative;
+            &>img{
+              position: absolute;
+            }
+            &>img:nth-child(2){
+              top:.wleft2(2px)[@rem]!important;
+              left:.convert(2px)[@rem];
+            }
+            &>img:nth-child(3){
+              top:.wleft2(5px)[@rem]!important;
+              left:.convert(5px)[@rem];
+            }
+            &>div:last-child{
+              position: absolute;
+              color:#fff;
+              font-size: .wleft2(13px)[@rem]!important;
+              left:.convert(50px)[@rem];
+              span{
+                color:@primary-color;
+                font-weight: bold;
+              }
+            }
+          }
+          .rectangle-top-div-right{
+            position: relative;
+            top:.wleft2(-90px)[@rem]!important;right:0px;
+            height: .wleft2(166.6px)[@rem]!important;
+            div,span{position: absolute;}
+            span{
+              top:.wleft2(53px)[@rem]!important;right:.convert(38px)[@rem];
+              color:#1890FF;font-size: .wleft2(24px)[@rem]!important;}
+            div{
+              top:.wleft2(120px)[@rem];;right:.wleft2(41.7px)[@rem]!important;
+              color:#fff;font-size:.wleft2(12px)[@rem]!important;}
+          }
+          .rectangle-top-last{
+            position: relative;
+            top:.wleft2(100px)[@rem]!important;
+            width: .convert(154px)[@rem];
+            height: .wleft2(45px)[@rem]!important;
+            font-size: .wleft2(14px)[@rem]!important;
+            text-align: center;
+            color:@primary-color;
+            background: url('@/assets/img/rectangle8.png') no-repeat;
+            background-size: 100% 100%;
+          }
+         .rectangle-top-echarts{
+          width: .convert(154px)[@rem];
+          height: .wleft2(200px)[@rem]!important;
+          position: absolute;
+          right:.convert(30px)[@rem];
+          top:.wleft2(30px)[@rem]!important;
+          img{
+            position: absolute;
+            top:.wleft2(22px)[@rem]!important;
+            width:.convert(154px)[@rem];
+          }
+         }
+        }
+        .rectangle-middle{
+          width: .convert(379.73px)[@rem];
+          height: .wleft2(392.6px)[@rem]!important;
+          background:url('@/assets/img/rectangle4.png') no-repeat; 
+          background-size: 100% 100%;
+          .rectangle-middle-echarts{
+            position: relative;
+            top:.wleft2(-130px)[@rem]!important;
+            left:.convert(-10px)[@rem];
+            width:.convert(379px)[@rem];
+            height:.wleft2(300px)[@rem]!important;
+          }
+        }
+        .rectangle-bottom{
+          width: .convert(379.73px)[@rem];
+          height: .wleft2(213.24px)[@rem]!important;
+          position: relative;
+          background:url('@/assets/img/rectangle5.png') no-repeat;
+          background-size: 100% 100%;
+          div.rectangle-top-div:nth-child(4){
+            top:.wleft2(100px)[@rem]!important;
+          }
+          .rectangle-bottom-echarts{
+            position: absolute;
+            width:.convert(230px)[@rem];
+            height:.wleft2(200px)[@rem]!important;
+            right:0px;
+            top:0px;
+          }
+        }
+      }
+    }
+  }
+}
   </style>
   
