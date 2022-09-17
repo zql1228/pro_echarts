@@ -478,13 +478,13 @@
           }
          .rectangle-top-echarts{
           width: .convert(154px)[@rem];
-          height: .wleft(200px)[@rem];
+          height: .wleft(213.24px)[@rem];
           position: absolute;
           right:.convert(30px)[@rem];
           top:.wleft(30px)[@rem];
           img{
             position: absolute;
-            top:.wleft(22px)[@rem];
+            top:.wleft(16px)[@rem];
             width:.convert(154px)[@rem];
           }
          }

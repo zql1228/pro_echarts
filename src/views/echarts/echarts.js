@@ -10,7 +10,7 @@ const option = {
   },
   legend: {
     left: 'center',
-    bottom:'0',
+    bottom:'0%',
     width:154,
     itemHeight: 12,//图例图标的高度
     itemWidth:12,//图例图标的宽度
